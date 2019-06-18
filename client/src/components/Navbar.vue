@@ -1,0 +1,102 @@
+<template>
+<!-- <nav class= "nav.navbar.navbar-expand-lg navbar-dark bg-dark rounded">
+  <button class= "navbar-toggle"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar1"
+      aria-controls="navbar"
+      aria-expanded="false"
+      aria-label="toggle navigation">
+      <span class="navbar-toggle-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbar1">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+        <router-link class="nav-link" to="/">Login</router-link>
+        </li>
+
+        <li v-if="auth==''" class="nav-item">
+            <router-link class="nav-link" to="/login">Login</router-link>
+        </li>
+
+        <li v-if="auth=='loggedin'" class="nav-item">
+          <router-link class="nav-link" to="/profile">Profile</router-link>
+        <li/>
+
+        <li v-if="auth=='loggedin'" class="nav-item">
+          <a class="nav-link" href="" v-on:click='logout'>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <router-link class="navbar-brand" to="/">Gestify</router-link>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li v-if="auth==''" class="nav-item">
+        <router-link class="nav-link" to="/login">Login</router-link>
+      </li>
+      <li v-if="auth==''" class="nav-item">
+        <router-link class="nav-link" to="/register">Register</router-link>
+      </li>
+      <li v-if="auth=='loggedin'" class="nav-item">
+        <router-link class="nav-link" to="/profile">Profile</router-link>
+      <li/>
+      <li v-if="auth=='loggedin'" class="nav-item1">
+        <router-link class="nav-link" to="/add_employee">Add_employee</router-link>
+      <li/>
+      <li v-if="auth=='loggedin'" class="nav-item">
+        <a class="nav-link" href="" v-on:click='logout'>Logout</a>
+      </li>
+      <li v-if="auth==''" class="nav-item">
+        <router-link class="nav-link" to="/about">About</router-link>
+      </li>
+
+
+    </ul>
+  </div>
+</nav>
+</template>
+
+<script>
+import { EventBus } from '@/Eventbus.js';
+export default {
+  data() {
+    return {
+      auth: '',
+      user:''
+    }
+  },
+
+  methods: {
+    logout() {
+      localStorage.removeItem('usertoken')
+    }
+  },
+
+  mounted() {
+// EventBus.$on('logged-in', test => {
+//   console.log(test)
+// });
+    EventBus.$on('logged-in', status => {
+      this.auth = status
+    })
+  }
+}
+</script>
+
+<style>
+.nav-item1{
+  float: right;
+}
+</style>
+
+
+
+
+
