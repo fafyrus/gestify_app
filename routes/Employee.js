@@ -6,13 +6,7 @@ const Employee = require ("../models/Employee");
 // CRUD Employee
 //// Create One
 router.post("/", (req, res) => {
-    let body = req.body;
-    let employeeData = {
-        first_name: body.first_name,
-        name: body.name,
-        email: body.email,
-        address: body.address
-    };
+    console.log(req.body);
 // requête SQL recherche dans la base de donnée si l'employé existe
     Employee.findOne({
         where: { email: req.body.email }
@@ -22,7 +16,11 @@ router.post("/", (req, res) => {
         }
 // Si l'employé n'existe pas, celui-ci est créé
         Employee.create({
-            employeeData
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email: req.body.email,
+            address: req.body.address,
+            id_company: req.body.id_company
         }).then(msg => {
             res.json({ statusCode: 201, status: 'success', statusMsg: msg});
         }).catch(err => {

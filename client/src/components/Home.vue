@@ -32,7 +32,7 @@
         <tbody>
           <tr v-for= "employee in employees" :key="employee.id">
             <td>{{employee.first_name}}</td>
-            <td>{{employee.name}}</td>
+            <td>{{employee.last_name}}</td>
             <td>{{employee.email}}</td>
             <td>{{employee.id}}</td>
           </tr>

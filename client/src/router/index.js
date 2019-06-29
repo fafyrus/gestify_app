@@ -6,6 +6,7 @@ import Register from '@/components/Register';
 import Profile from '@/components/Profile';
 import About from '@/components/About';
 import Add_employee from '@/components/Add_employee';
+import Add_company from '@/components/Add_company';
 
 
 Vue.use(Router);
@@ -42,6 +43,11 @@ export default new Router({
       path: '/add_employee',
       name: 'Add_employee',
       component: Add_employee
+    },
+    {
+      path: '/add_company',
+      name: 'Add_company',
+      component: Add_company
     }
 
   ]

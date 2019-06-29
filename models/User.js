@@ -2,8 +2,7 @@
 const Sequelize = require ("sequelize");
 const db = require ("../database/db");
 
-module.exports = db.sequelize.define('user', {
-
+module.exports = db.sequelize.define('USER', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -21,12 +20,16 @@ module.exports = db.sequelize.define('user', {
         password: {
             type: Sequelize.STRING
         },
+        first_connection: {
+            type: Sequelize.BOOLEAN
+        },
         created: {
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW
         }
     },
     {
-        timestamps: false
+        timestamps: false,
+        freezeTableName: true
     }
 );

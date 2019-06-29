@@ -15,6 +15,5 @@ const sequelize = new Sequelize ("gestify_db", "root", "root", {
 });
 
 db.sequelize = sequelize;
-db.sequelize = sequelize;
 
 module.exports = db;

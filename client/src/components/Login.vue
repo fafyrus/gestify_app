@@ -21,39 +21,39 @@
 </template>
 // Appel backend via appel ajax
 <script>
-import axios from 'axios'
-import router from '../router'
-import { EventBus } from '@/Eventbus.js';
+  import axios from 'axios'
+  import router from '../router'
+  import { EventBus } from '@/Eventbus.js';
 
-export default {
-  data() {
-    return {
-      email:'',
-      password: ''
-    }
-  },
-
-  methods: {
-    login() {
-      axios.post('http://localhost:3000/users/login', {
-          email: this.email,
-          password: this.password
-        }).then(res => {
-          console.log(res);
-          localStorage.setItem('usertoken', res.data)
-          this.email = ''
-          this.password = ''
-          router.push({name: 'Profile'})
-        }).catch(err => {
-          console.log(err)
-        })
-        this.emitMethod()
+  export default {
+    data() {
+      return {
+        email:'',
+        password: ''
+      }
     },
-    emitMethod() {
-      EventBus.$emit('logged-in', 'loggedin')
+
+    methods: {
+      login() {
+        axios.post('http://localhost:3000/users/login', {
+            email: this.email,
+            password: this.password
+          }).then(res => {
+            console.log(res);
+              localStorage.setItem('usertoken', res.data)
+            this.email = ''
+            this.password = ''
+            router.push({name: 'Profile'})
+          }).catch(err => {
+            console.log(err)
+            })
+          this.emitMethod()
+      },
+      emitMethod() {
+        EventBus.$emit('logged-in', 'loggedin')
+      }
     }
   }
-}
 </script>
 
 <style>

@@ -30,8 +30,8 @@
         <div class="well">
             <h4>Employee location</h4>
             <div class="form-group">
-                <label>Adress</label>
-                <input type="text" class='form-control' placeholder="Adress" v-model="employee.adress">
+                <label>Address</label>
+                <input type="text" class='form-control' placeholder="Address" v-model="employee.adress">
             </div>
             <div class="form-group">
                 <label>City</label>
@@ -69,6 +69,8 @@ export default {
   methods:{
     addEmployee(e){
         console.log(123);
+          if (!this.employee.first_name || !this.employee.last_name || !this.employee.first_name || !this.employee.email)
+            console.log('please fill all required fiels')
         e.preventDefault();
     }
   }

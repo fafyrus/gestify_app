@@ -8,11 +8,10 @@ const User = require ("../models/User");
 process.env.SECRET_KEY = 'secret';
 
 router.post("/register", (req, res) => {
-    console.log(req.body);
     const today = new Date();
     const userData = {
-        first_name : req.body.last_name,
-        last_name : req.body.lasr_name,
+        first_name : req.body.first_name,
+        last_name : req.body.last_name,
         email : req.body.email,
         password : req.body.password,
         created : today
@@ -29,7 +28,7 @@ router.post("/register", (req, res) => {
                 userData.password = hash;
                 User.create(userData)
                 .then(user => {
-                    res.json({ status: user.email + ' registreted'});
+                    res.status(201).send({status: user.email + ' registreted'});
                 })
                 .catch(err => {
                     res.send('error: ' + err);
@@ -45,20 +44,20 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-    console.log(req.body);
     User.findOne({
         where: {
             email: req.body.email
         }
     }).
     then(user => {
-        console.log(user);
         if(user) {
+            console.log(user.dataValues);
             if(bcrypt.compareSync(req.body.password, user.password)){
+                delete user.dataValues.password;
                 let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                     expiresIn: 1440
                 });
-                res.send(token);
+                res.status(200).send({token: token, user: user.dataValues});
             }
         } else {
             res.status(400).send({error: 'User does not exist'});

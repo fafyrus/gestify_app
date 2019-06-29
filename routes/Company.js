@@ -5,22 +5,17 @@ const Company = require ("../models/Company");
 
 // CRUD Company
 //// Create One
-router.post("/", (req, res) => {
-    let body = req.body;
-    let companyData = {
-        name: body.name,
-        address: body.address,
-    };
-
+router.post("/:user_id", (req, res) => {
     Company.findOne({
         where: { name: req.body.name }
     }).then(company => {
         if (company) {
             res.json({statusCode: 409, status: 'already exists'});
         }
-
         Company.create({
-            ecompanyData
+            name: req.body.name,
+            address: req.body.address,
+            id_user: req.params.user_id
         }).then(msg => {
             res.json({ statusCode: 201, status: 'success', statusMsg: msg});
         }).catch(err => {

@@ -2,8 +2,7 @@
 const Sequelize = require ("sequelize");
 const db = require ("../database/db");
 
-module.exports = db.sequelize.define('employee', {
-
+module.exports = db.sequelize.define('EMPLOYEE', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -12,18 +11,23 @@ module.exports = db.sequelize.define('employee', {
         first_name: {
             type: Sequelize.STRING
         },
-        name: {
+        last_name: {
             type: Sequelize.STRING
         },
         email: {
             type: Sequelize.STRING
         },
-        adress: {
+        address: {
             type: Sequelize.STRING
         },
-        id_company :{
+        id_company:{
             type: Sequelize.INTEGER
-        },
-        timestamps: false
+        }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
+
+

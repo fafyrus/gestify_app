@@ -2,8 +2,7 @@
 const Sequelize = require ("sequelize");
 const db = require ("../database/db");
 
-module.exports = db.sequelize.define('company', {
-
+module.exports = db.sequelize.define('COMPANY', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -17,7 +16,10 @@ module.exports = db.sequelize.define('company', {
         },
         id_user :{
             type: Sequelize.INTEGER
-        },
-        timestamps: false
+        }
+    },
+    {
+        timestamps: false,
+        freezeTableName: true
     }
 );
