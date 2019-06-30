@@ -37,7 +37,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ml-auto">
       <li v-if="auth==''" class="nav-item">
         <router-link class="nav-link" to="/login">Login</router-link>
       </li>
@@ -91,9 +91,36 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Dosis:300|Varela+Round&display=swap');
+
 .nav-item1{
   float: right;
 }
+
+nav {
+  box-shadow: -1px 4px 6px gray;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.bg-light {
+  background-color: #f2f2f2 !important
+}
+
+.nav-item:first-child {
+  border-right: 1px solid gray
+}
+
+ul {
+  font-family: "Dosis";
+  font-weight: bold;
+}
+
+.navbar-brand {
+  font-family: "Varela Round";
+  text-shadow: 1px 1px 1px grey;
+}
+
 </style>
 
 

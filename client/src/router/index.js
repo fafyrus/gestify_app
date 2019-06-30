@@ -7,6 +7,8 @@ import Profile from '@/components/Profile';
 import About from '@/components/About';
 import Add_employee from '@/components/Add_employee';
 import Add_company from '@/components/Add_company';
+import Contract from '@/components/Contract';
+import Pay_slip from '@/components/Pay_slip';
 
 
 Vue.use(Router);
@@ -48,7 +50,17 @@ export default new Router({
       path: '/add_company',
       name: 'Add_company',
       component: Add_company
+    },
+    {
+      path: '/contract',
+      name: 'Contract',
+      component: Contract
+    },
+    {
+      path: '/pay_slip',
+      name: 'Pay_slip',
+      component: Pay_slip
     }
-
   ]
 });
+

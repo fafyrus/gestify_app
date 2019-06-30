@@ -57,8 +57,51 @@
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Dosis:300,700|Montserrat&display=swap');
 
+body {
+  width: 100%;
+  min-height: 88vh;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat";
+}
+
+label {
+  font-family: "Dosis";
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 16px;
+  border: 1px solid rgb(128, 127, 127);
+}
+
+.btn-block {
+  width: 50%;
+  margin: auto;
+  border-radius: 16px;
+  font-family: "Montserrat";
+  background-color: #f5f5f5;
+  border: 1px solid #b8b8b8;
+  color: #b8b8b8;
+}
+
+.btn-block:hover {
+  background-color: #b8b8b8;
+  border: 0;
+
+}
 </style>
+Collapse
+
+
+
+Message Input
 
 
 
