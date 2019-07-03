@@ -37,7 +37,7 @@ router.get("/", (req, res) => {
 
 //// Get One
 router.get("/:id", (req, res) => {
-    Company.findOne({where: {id: req.params.id}}).then(company => {
+    Company.findOne({where: {id_user: req.params.id}}).then(company => {
         res.status(200).send(company);
     }).catch(err => {
         res.json({ statusCode: 400, status: `failure: ${err}`});

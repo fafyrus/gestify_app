@@ -20,6 +20,9 @@ router.post("/", (req, res) => {
             last_name: req.body.last_name,
             email: req.body.email,
             address: req.body.address,
+            phone: req.body.phone,
+            city: req.body.city,
+            state: req.body.state,
             id_company: req.body.id_company
         }).then(msg => {
             res.json({ statusCode: 201, status: 'success', statusMsg: msg});
@@ -58,9 +61,12 @@ router.put("/:id", (req, res) => {
         if (employee.dataValues) {
             Employee.update({
                 first_name: body.first_name,
-                name: body.name,
+                last_name: body.last_name,
                 email: body.email,
-                address: body.address
+                address: body.address,
+                phone: req.body.phone,
+                city: req.body.city,
+                state: req.body.state
             },
             { where: { id: req.params.id }}
             ).then(() => {

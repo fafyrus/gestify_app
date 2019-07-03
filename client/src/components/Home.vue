@@ -1,84 +1,82 @@
 <template>
+<body>
   <div class="employees container">
     <h1 class="page-header">Manage Employees</h1>
-
-      <div class="row">
-        <div class="col-8">
-          <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-  <!-- <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button">Button</button>
-  </div> -->
-</div>
-        </div>
-        <div class="col-4 text-right">
-        <router-link class="nav-link" to="/add_employee">
-        <button class="btn btn-outline-secondary" type="button">+ Add</button>
-        </router-link>
-
+    <div class="row">
+      <div class="col-8">
+        <div class="input-group mb-3">
+          <p class="find">
+            <i class="fa fa-search"></i> Find an employee:
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+          >
+          <!-- <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Button</button>
+          </div>-->
         </div>
       </div>
-
-
+      <div class="col-4 text-right">
+        <router-link class="nav-link" to="/add_employee">
+          <button class="btn btn-outline-secondary" type="button">
+            <i class="fa fa-user-plus"></i>
+            <p class="add">+ Add</p>
+          </button>
+        </router-link>
+      </div>
+    </div>
+    <div class="trait"></div>
     <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Id</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for= "employee in employees" :key="employee.id">
-            <td>{{employee.first_name}}</td>
-            <td>{{employee.last_name}}</td>
-            <td>{{employee.email}}</td>
-            <td>{{employee.id}}</td>
-            <td><router-link class="btn btn-default" v-bind:to="'/employee/'+employee.id">View</router-link></td>
-          </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(employee) in listEmployee" :key="employee.id">
+          <td>{{employee.first_name}}</td>
+          <td>{{employee.last_name}}</td>
+          <td>{{employee.email}}</td>
+          <td>
+            <router-link class="btn btn-default" :to="'/employee_info/' + employee.id">View</router-link>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
+</body>
 </template>
 
-
 <script>
-import axios from "axios";
+import axios from 'axios'
+
 export default {
   name: "employees",
-  data(){
+  data() {
     return {
-      employees: []
+      listEmployee: []
     }
   },
-  methods: {
-    fetchEmployees(){
-      this.$http.get('http://localhost:3000')
-        .then(function(response){
-          this.employees = JSON.parse(response.body);
-      });
-    },
-    fetchEmployeesV2() {
-      axios.get('http://localhost:3000/employee')
-        .then((response) => {
-          console.log(response);
-          this.employees = response.data;
-        });
-    }
-  },
-  created(){
-    // this.fetchEmployees();
-    this.fetchEmployeesV2();
+  created() {
+    axios.get('http://localhost:3000/employee').then(response => {
+      this.listEmployee = response.data;
+    }).catch(error => {
+      console.log(error)
+    })
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Dosis:300,700|Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Dosis:300,700|Montserrat&display=swap");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-
 
 body {
   width: 100%;
@@ -95,7 +93,8 @@ table {
   font-weight: bold;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   border-top: 0;
 }
 
@@ -114,162 +113,156 @@ table {
 }
 
 /* Computer Version */
-@media screen and (min-width:960px) {
+@media screen and (min-width: 960px) {
+  .find {
+    font-family: "Montserrat";
+    position: relative;
+    left: 10%;
+    margin-top: 3px;
+  }
 
-.find {
-  font-family: "Montserrat";
-  position: relative;
-  left: 10%;
-  margin-top: 3px;
-}
+  .form-control {
+    border-radius: 16px;
+    left: 15%;
+    top: 2%;
+    height: 30px;
+    border: 1px solid rgb(128, 127, 127);
+  }
 
-.form-control {
-  border-radius: 16px;
-  left: 15%;
-  top: 2%;
-  height: 30px;
-  border: 1px solid rgb(128, 127, 127);
-}
-
-.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+  .input-group > .form-control:not(:first-child),
+  .input-group > .custom-select:not(:first-child) {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
-}
+  }
 
-button {
-  background-color: #d5d5d5;
-  color: white;
-  border: 0;
-  border-radius: 16px;
-  width: 8vw;
-  height: 33px;
-  position: relative;
-  margin-top: -4%;
-  padding-top: 1%;
-}
+  button {
+    background-color: #d5d5d5;
+    color: white;
+    border: 0;
+    border-radius: 16px;
+    width: 8vw;
+    height: 33px;
+    position: relative;
+    margin-top: -4%;
+    padding-top: 1%;
+  }
 
-.fa-user-plus {
-  display: none
-}
+  .fa-user-plus {
+    display: none;
+  }
 }
 
 /* XL Tablet Version */
-@media screen and (min-width:780px) and (max-width: 959px) {
+@media screen and (min-width: 780px) and (max-width: 959px) {
+  .find {
+    font-family: "Montserrat";
+    position: relative;
+    left: 10%;
+    margin-top: 3px;
+  }
 
-.find {
-  font-family: "Montserrat";
-  position: relative;
-  left: 10%;
-  margin-top: 3px;
-}
+  .form-control {
+    border-radius: 16px;
+    left: 15%;
+    top: 2%;
+    height: 1%;
+    border: 1px solid rgb(128, 127, 127);
+  }
 
-.form-control {
-  border-radius: 16px;
-  left: 15%;
-  top: 2%;
-  height: 1%;
-  border: 1px solid rgb(128, 127, 127);
-}
-
-.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+  .input-group > .form-control:not(:first-child),
+  .input-group > .custom-select:not(:first-child) {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
-}
+  }
 
-button {
-  background-color: #d5d5d5;
-  color: white;
-  border: 0;
-  border-radius: 16px;
-  width: 80px;
-  height: 40px;
-  position: relative;
-  margin-top: -7%;
-  padding-top: 1%;
-}
+  button {
+    background-color: #d5d5d5;
+    color: white;
+    border: 0;
+    border-radius: 16px;
+    width: 80px;
+    height: 40px;
+    position: relative;
+    margin-top: -7%;
+    padding-top: 1%;
+  }
 
-.add {
-  display: none
-}
+  .add {
+    display: none;
+  }
 }
 
 /* XS Tablet Version */
-@media screen and (min-width:481px) and (max-width: 779px) {
+@media screen and (min-width: 481px) and (max-width: 779px) {
+  .find {
+    display: none;
+  }
 
-.find {
-  display: none;
-}
+  .form-control {
+    border-radius: 16px;
+    left: 15%;
+    top: 2%;
+    height: 1%;
+    border: 1px solid rgb(128, 127, 127);
+  }
 
-.form-control {
-  border-radius: 16px;
-  left: 15%;
-  top: 2%;
-  height: 1%;
-  border: 1px solid rgb(128, 127, 127);
-}
-
-.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+  .input-group > .form-control:not(:first-child),
+  .input-group > .custom-select:not(:first-child) {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
-}
+  }
 
-button {
-  background-color: #d5d5d5;
-  color: white;
-  border: 0;
-  border-radius: 16px;
-  width: 80px;
-  height: 40px;
-  position: relative;
-  margin-top: -7%;
-  padding-top: 1%;
-}
+  button {
+    background-color: #d5d5d5;
+    color: white;
+    border: 0;
+    border-radius: 16px;
+    width: 80px;
+    height: 40px;
+    position: relative;
+    margin-top: -7%;
+    padding-top: 1%;
+  }
 
-.add {
-  display: none
-}
+  .add {
+    display: none;
+  }
 }
 
 /* Phone Version */
 @media screen and (max-width: 480px) {
+  .find {
+    display: none;
+  }
 
-.find {
-  display: none;
-}
+  .form-control {
+    border-radius: 16px;
+    left: 15%;
+    top: 2%;
+    height: 1%;
+    border: 1px solid rgb(128, 127, 127);
+  }
 
-.form-control {
-  border-radius: 16px;
-  left: 15%;
-  top: 2%;
-  height: 1%;
-  border: 1px solid rgb(128, 127, 127);
-}
-
-.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+  .input-group > .form-control:not(:first-child),
+  .input-group > .custom-select:not(:first-child) {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
-}
+  }
 
-button {
-  background-color: #d5d5d5;
-  color: white;
-  border: 0;
-  border-radius: 16px;
-  width: 80%;
-  height: 40px;
-  position: relative;
-  margin-top: -15%;
-  padding-top: 1%;
-}
+  button {
+    background-color: #d5d5d5;
+    color: white;
+    border: 0;
+    border-radius: 16px;
+    width: 80%;
+    height: 40px;
+    position: relative;
+    margin-top: -15%;
+    padding-top: 1%;
+  }
 
-.add {
-  display: none
+  .add {
+    display: none;
+  }
 }
-
-}
-
 </style>
-
-
-
-

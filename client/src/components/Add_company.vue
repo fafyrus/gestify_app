@@ -1,25 +1,24 @@
 <template>
-    <form>
+  <body>
+    <h1 class="page-header">Add company</h1>
+    <form @submit="addCompany">
+      <div class="trait"></div>
       <div class="form-group">
-          <label for="exampleInputEmail1">Name</label>
-          <input type="email" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Enter name">
-          <small id="namelHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <input type="text" class="form-control" v-model="company.name" placeholder="Enter name">
       </div>
       <div class="form-group">
-          <label for="exampleInputPassword1">Address</label>
-          <input type="address" class="form-control" id="exampleInputName1" placeholder="Name">
-      </div>
-      <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <input type="text" class="form-control" v-model="company.address" placeholder="Address">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    </form>
+  </body>
 </template>
 
 <script>
+import axios from "axios";
+import jwtDecode from 'jwt-decode';
+
 export default {
-  name: "add",
   data(){
     return {
       company: {
@@ -30,14 +29,102 @@ export default {
   },
   methods:{
     addCompany(e){
-        console.log(345);
-        e.preventDefault();
+      e.preventDefault();
+      const token = localStorage.getItem('usertoken')
+      const user = jwtDecode(token)
+      axios.post(`http://localhost:3000/company/${user.id}`, this.company).then(response => {
+        localStorage.setItem('company', JSON.stringify(response.data.statusMsg))
+        this.changeUserStatus(user.id)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    changeUserStatus(userId) {
+      axios.patch(`http://localhost:3000/users/${userId}`).then(response => {
+        this.$router.push('/');
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  },
+  created() {
+    const token = localStorage.getItem('usertoken')
+    const user = jwtDecode(token)
+    if (user.first_connection) {
+      return false;
+    } else {
+      axios.get(`http://localhost:3000/company/${user.id}`).then(response => {
+        localStorage.setItem('company', JSON.stringify(response.data))
+        this.$router.push('/')
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Dosis:300,700|Montserrat&display=swap');
 
+body {
+  width: 100%;
+  min-height: 88vh;
+  background-color: #f5f5f5;
+}
+
+.page-header{
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat";
+  padding: 3%;
+}
+
+.trait {
+  border-top: solid 1px #b8b8b8;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 1%;
+}
+
+small, .form-check {
+  display: flex;
+  justify-content: center;
+}
+
+.form-check-input {
+  position: relative;
+}
+
+.form-control {
+  border-radius: 16px;
+  border: 1px solid rgb(128, 127, 127);
+  margin: auto;
+  width: 50%;
+}
+
+.form-group {
+  margin-top: 2%;
+  background-color: #f5f5f5;
+}
+
+.btn-primary {
+  width: 30%;
+  position: relative;
+  left: 35%;
+  margin-top: 2%;
+  border-radius: 16px;
+  font-family: "Montserrat";
+  background-color: #f5f5f5;
+  border: 1px solid #b8b8b8;
+  color: #b8b8b8;
+}
+
+.btn-primary:hover {
+  background-color: #b8b8b8;
+  border: 0;
+  color: white;
+
+}
 </style>
 

@@ -5,19 +5,15 @@
               <form v-on:submit.prevent="register">
                   <h1 class="h3 mb-3 font-weight-normal">Register</h1>
                   <div class="form-group">
-                    <label for="first_name">First Name</label>
                     <input type="text" v-model="first_name" class="form-control" name="first_name" placeholder="Enter First Name">
                   </div>
                   <div class="form-group">
-                    <label for="first_name">last Name</label>
                     <input type="text" v-model="last_name" class="form-control" name="Last_name" placeholder="Enter Last Name">
                   </div>
                   <div class="form-group">
-                    <label for="email">Email</label>
                     <input type="text" v-model="email" class="form-control" name="email" placeholder="Enter Email">
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
                     <input type="password" v-model="password" class="form-control" name="password" placeholder="Enter Password">
                   </div>
                   <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
@@ -105,13 +101,3 @@ label {
 
 }
 </style>
-Collapse
-
-
-
-Message Input
-
-
-
-
-

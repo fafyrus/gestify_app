@@ -68,4 +68,22 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.patch("/:id", (req, res) => {
+    User.findByPk(req.params.id).then((user) => {
+        if (user.dataValues) {
+            User.update({
+                first_connection: false
+            },
+            { where: { id: req.params.id }}
+            ).then(() => {
+                res.status(201).send({message: 'user succesfully updated'});
+            });
+        } else {
+            res.status(409).send({message: 'not exist'});
+        }
+    }).catch(err => {
+        res.json({ statusCode: 400, status: `failure: ${err}`});
+    });
+});
+
 module.exports = router;

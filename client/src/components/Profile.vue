@@ -1,28 +1,39 @@
 <template>
+<body>
   <div class='container'>
-      <div class='jumbotron mt-5'>
-        <div class="col-sm-8 mx-auto">
-          <h1 class="text-center">PROFILE</h1>
-        </div>
-      </div>
-    <table class="table col-md-6 mx-auto">
-      <tbody>
-        <tr>
-          <td>First_name</td>
-          <td>{{first_name}}</td>
-        </tr>
-         <tr>
-          <td>Last_name</td>
-          <td>{{last_name}}</td>
-        </tr>
-         <tr>
-          <td>Email</td>
-          <td>{{email}}</td>
-        </tr>
-      </tbody>
+    <h1 class="text-center">PROFILE</h1>
+      <div class="trait"></div>
+        <table class="table col-md-6 mx-auto">
+          <tbody>
+            <tr>
+              <p>First name : </p>
+              <td>{{first_name}}</td>
+            </tr>
+            <tr>
+              <p>Last name : </p>
+              <td>{{last_name}}</td>
+            </tr>
+            <tr>
+              <p>Email : </p>
+              <td>{{email}}</td>
+            </tr>
+             <tr>
+              <p>Phone : </p>
+              <td>{{phone}}</td>
+            </tr>
+             <tr>
+              <p>City : </p>
+              <td>{{city}}</td>
+            </tr>
+             <tr>
+              <p>State: </p>
+              <td>{{state}}</td>
+            </tr>
+          </tbody>
 
-    </table>
+        </table>
   </div>
+</body>
 </template>
 
 <script>
@@ -35,9 +46,49 @@ export default {
     return {
       first_name: decoded.first_name,
       last_name: decoded.last_name,
-      email: decoded.email
+      email: decoded.email,
+      phone: decoded.phone,
+      city: decoded.city,
+      state: decoded.state
     }
   }
 }
 </script>
 
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css?family=Dosis:300,700|Montserrat&display=swap');
+
+body {
+  width: 100%;
+  min-height: 88vh;
+  background-color: #f5f5f5;
+}
+
+.text-center {
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat";
+  padding: 3%;
+}
+
+.trait {
+  border-top: solid 1px #b8b8b8;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 1%;
+}
+
+p {
+  font-family: "Dosis";
+}
+
+tbody {
+  display: grid;
+}
+
+.table th, .table td {
+  border: 0;
+}
+
+</style>

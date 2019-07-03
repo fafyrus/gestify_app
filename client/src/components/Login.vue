@@ -22,7 +22,6 @@
 // Appel backend via appel ajax
 <script>
   import axios from 'axios'
-  import router from '../router'
   import { EventBus } from '@/Eventbus.js';
 
   export default {
@@ -39,11 +38,10 @@
             email: this.email,
             password: this.password
           }).then(res => {
-            console.log(res);
-              localStorage.setItem('usertoken', res.data)
+            localStorage.setItem('usertoken', res.data.token)
             this.email = ''
             this.password = ''
-            router.push({name: 'Profile'})
+            this.$router.push({name: 'Add_company'})
           }).catch(err => {
             console.log(err)
             })
@@ -97,12 +95,3 @@ label {
 
 }
 </style>
-Collapse
-
-
-
-Message Input
-
-
-
-

@@ -46,7 +46,6 @@
       </li>
       <li v-if="auth=='loggedin'" class="nav-item">
         <router-link class="nav-link" to="/profile">Profile</router-link>
-      <li/>
       <li v-if="auth=='loggedin'" class="nav-item1">
         <router-link class="nav-link" to="/add_employee">Add_employee</router-link>
       <li/>
@@ -75,7 +74,8 @@ export default {
 
   methods: {
     logout() {
-      localStorage.removeItem('usertoken')
+      localStorage.clear();
+      this.$router.push('/login')
     }
   },
 
@@ -122,8 +122,4 @@ ul {
 }
 
 </style>
-
-
-
-
 

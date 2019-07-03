@@ -20,6 +20,15 @@ module.exports = db.sequelize.define('EMPLOYEE', {
         address: {
             type: Sequelize.STRING
         },
+        phone: {
+            type: Sequelize.STRING
+        },
+        city: {
+            type: Sequelize.STRING
+        },
+        state: {
+            type:Sequelize.STRING
+        },
         id_company:{
             type: Sequelize.INTEGER
         }
