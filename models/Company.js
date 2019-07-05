@@ -14,7 +14,7 @@ module.exports = db.sequelize.define('COMPANY', {
         address: {
             type: Sequelize.STRING
         },
-        id_user :{
+        author_id :{
             type: Sequelize.INTEGER
         }
     },

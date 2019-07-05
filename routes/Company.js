@@ -5,7 +5,7 @@ const Company = require ("../models/Company");
 
 // CRUD Company
 //// Create One
-router.post("/:user_id", (req, res) => {
+router.post("/", (req, res) => {
     Company.findOne({
         where: { name: req.body.name }
     }).then(company => {
@@ -15,7 +15,7 @@ router.post("/:user_id", (req, res) => {
         Company.create({
             name: req.body.name,
             address: req.body.address,
-            id_user: req.params.user_id
+            author_id: req.body.author_id
         }).then(msg => {
             res.json({ statusCode: 201, status: 'success', statusMsg: msg});
         }).catch(err => {
@@ -37,7 +37,7 @@ router.get("/", (req, res) => {
 
 //// Get One
 router.get("/:id", (req, res) => {
-    Company.findOne({where: {id_user: req.params.id}}).then(company => {
+    Company.findOne({where: {id: req.params.id}}).then(company => {
         res.status(200).send(company);
     }).catch(err => {
         res.json({ statusCode: 400, status: `failure: ${err}`});

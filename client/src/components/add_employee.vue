@@ -84,7 +84,7 @@ export default {
         this.employee.state
       ) {
         axios.post('http://localhost:3000/employee', this.employee).then(response => {
-          if(response.data.statusCode === 201) {
+          if(response.status === 201) {
             this.$router.push('/')
           }
         }).catch(error => {

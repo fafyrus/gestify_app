@@ -38,25 +38,23 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li v-if="auth==''" class="nav-item">
+      <li v-if="!isLogged" class="nav-item">
         <router-link class="nav-link" to="/login">Login</router-link>
       </li>
-      <li v-if="auth==''" class="nav-item">
+      <li v-if="!isLogged" class="nav-item">
         <router-link class="nav-link" to="/register">Register</router-link>
       </li>
-      <li v-if="auth=='loggedin'" class="nav-item">
+      <li v-if="isLogged" class="nav-item">
         <router-link class="nav-link" to="/profile">Profile</router-link>
-      <li v-if="auth=='loggedin'" class="nav-item1">
+      <li v-if="isLogged" class="nav-item1">
         <router-link class="nav-link" to="/add_employee">Add_employee</router-link>
       <li/>
-      <li v-if="auth=='loggedin'" class="nav-item">
+      <li v-if="isLogged" @click="logout()" class="nav-item">
         <a class="nav-link" href="" v-on:click='logout'>Logout</a>
       </li>
-      <li v-if="auth==''" class="nav-item">
+      <li class="nav-item">
         <router-link class="nav-link" to="/about">About</router-link>
       </li>
-
-
     </ul>
   </div>
 </nav>
@@ -67,25 +65,19 @@ import { EventBus } from '@/Eventbus.js';
 export default {
   data() {
     return {
-      auth: '',
       user:''
     }
   },
-
   methods: {
     logout() {
       localStorage.clear();
       this.$router.push('/login')
     }
   },
-
-  mounted() {
-// EventBus.$on('logged-in', test => {
-//   console.log(test)
-// });
-    EventBus.$on('logged-in', status => {
-      this.auth = status
-    })
+  computed: {
+    isLogged() {
+      return !!localStorage.getItem('usertoken')
+    }
   }
 }
 </script>

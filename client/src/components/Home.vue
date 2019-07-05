@@ -9,6 +9,7 @@
             <i class="fa fa-search"></i> Find an employee:
           </p>
           <input
+            v-model="search"
             type="text"
             class="form-control"
             placeholder="Search..."
@@ -38,13 +39,17 @@
           <th>Email</th>
         </tr>
       </thead>
+
       <tbody>
-        <tr v-for="(employee) in listEmployee" :key="employee.id">
+        <tr v-for="(employee) in filteredEmployee" :key="employee.id">
           <td>{{employee.first_name}}</td>
           <td>{{employee.last_name}}</td>
           <td>{{employee.email}}</td>
           <td>
             <router-link class="btn btn-default" :to="'/employee_info/' + employee.id">View</router-link>
+          </td>
+          <td>
+            <button @click="() => deleteEmployee(employee.id)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -60,7 +65,8 @@ export default {
   name: "employees",
   data() {
     return {
-      listEmployee: []
+      listEmployee: [],
+      search: ""
     }
   },
   created() {
@@ -69,6 +75,31 @@ export default {
     }).catch(error => {
       console.log(error)
     })
+  },
+  methods: {
+    deleteEmployee(id) {
+      axios.delete(`http://localhost:3000/employee/${id}`).then((response) => {
+        if (response.status === 200) {
+          console.log("Employee deleted")
+          let index = this.listEmployee.findIndex((val) => val.id === id)
+          delete this.listEmployee[index];
+          this.listEmployee = this.listEmployee.filter(val => !!val)
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+    // onSearchChange(e) {
+    //   const { value } = e.target;
+    //   const employees = this.listEmployee;
+    //   this.filteredEmployee = employees.filter((employee) => !!employee.email.match(value))
+    // }
+  },
+  computed: {
+    filteredEmployee() {
+      const employees = this.listEmployee;
+      return employees.filter((employee) => !!employee.email.match(this.search))
+    }
   }
 };
 </script>

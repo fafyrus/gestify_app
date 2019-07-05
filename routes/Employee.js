@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
             state: req.body.state,
             id_company: req.body.id_company
         }).then(msg => {
-            res.json({ statusCode: 201, status: 'success', statusMsg: msg});
+            res.status(201).json({ status: 'success', statusMsg: msg});
         }).catch(err => {
             res.json({ error: `failure: ${err}`});
         });
@@ -49,7 +49,7 @@ router.get("/:id", (req, res) => {
     Employee.findOne({where: {id: req.params.id}}).then(employee => {
         res.status(200).send(employee);
     }).catch(err => {
-        res.json({ statusCode: 400, status: `failure: ${err}`});
+        res.status(400).json({ status: `failure: ${err}`});
     });
 });
 

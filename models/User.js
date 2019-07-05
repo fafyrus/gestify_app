@@ -1,5 +1,6 @@
 // jshint esversion: 6
 const Sequelize = require ("sequelize");
+const Company = require('./Company');
 const db = require ("../database/db");
 
 module.exports = db.sequelize.define('USER', {
@@ -22,6 +23,13 @@ module.exports = db.sequelize.define('USER', {
         },
         first_connection: {
             type: Sequelize.BOOLEAN
+        },
+        company_id: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: Company,
+                key: 'id'
+              }
         },
         created: {
             type: Sequelize.DATE,

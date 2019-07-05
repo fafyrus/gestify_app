@@ -3,7 +3,9 @@ const express = require ("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require ("bcrypt");
+const Sequelize = require ("sequelize");
 const User = require ("../models/User");
+const Company = require ("../models/Company");
 
 process.env.SECRET_KEY = 'secret';
 
@@ -64,6 +66,28 @@ router.post("/login", (req, res) => {
         }
     })
     .catch(err => {
+        res.status(400).send({error: err});
+    });
+});
+
+router.get("/:id/company", (req, res) => {
+    User.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [
+            {
+                model: Company,
+                as: 'children',
+                where: { id: Sequelize.col('USER.company_id') }
+            }
+        ]
+    }).
+    then(company => {
+        console.log(company)
+    })
+    .catch(err => {
+        console.error(err)
         res.status(400).send({error: err});
     });
 });

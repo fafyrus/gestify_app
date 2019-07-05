@@ -32,7 +32,7 @@ export default {
       e.preventDefault();
       const token = localStorage.getItem('usertoken')
       const user = jwtDecode(token)
-      axios.post(`http://localhost:3000/company/${user.id}`, this.company).then(response => {
+      axios.post(`http://localhost:3000/company`, { ...this.company, author_id: user.id }).then(response => {
         localStorage.setItem('company', JSON.stringify(response.data.statusMsg))
         this.changeUserStatus(user.id)
       }).catch(error => {
@@ -53,7 +53,8 @@ export default {
     if (user.first_connection) {
       return false;
     } else {
-      axios.get(`http://localhost:3000/company/${user.id}`).then(response => {
+      axios.get(`http://localhost:3000/users/${user.id}/company`).then(response => {
+        console.log("test")
         localStorage.setItem('company', JSON.stringify(response.data))
         this.$router.push('/')
       }).catch(error => {
