@@ -4,7 +4,7 @@ const router = express.Router();
 const Company = require ("../models/Company");
 
 // CRUD Company
-//// Create One
+////  SQL request to see if the company exist or not
 router.post("/", (req, res) => {
     Company.findOne({
         where: { name: req.body.name }
@@ -12,6 +12,7 @@ router.post("/", (req, res) => {
         if (company) {
             res.json({statusCode: 409, status: 'already exists'});
         }
+    //// Create a company
         Company.create({
             name: req.body.name,
             address: req.body.address,
@@ -26,12 +27,8 @@ router.post("/", (req, res) => {
 
 //// Get All
 router.get("/", (req, res) => {
-    Company.findAll()
-    .then((listCompanies) => {
-        res.status(200).send(listCompanies);
-    })
-    .catch(err => {
-        res.json({ statusCode: 400, status: `failure: ${err}`});
+    getAllCompanies(response => {
+        res.send(response);
     });
 });
 
@@ -44,7 +41,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-//// Edit One
+//// Edit One/ update
 router.put("/:id", (req, res) => {
     const body = req.body;
     Company.findOne({ where: { id: req.params.id } })
