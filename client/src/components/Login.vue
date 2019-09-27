@@ -22,7 +22,7 @@
 // Appel backend via appel ajax
 <script>
   import axios from 'axios'
-  import { EventBus } from '@/Eventbus.js';
+  import  EventBus  from '../Eventbus.js';
 
   export default {
     data() {

@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/home';
-import Login from '@/components/Login';
-import Register from '@/components/Register';
-import Profile from '@/components/Profile';
-import About from '@/components/About';
-import Add_employee from '@/components/Add_employee';
-import Add_company from '@/components/Add_company';
-import EmployeeInfo from "@/components/Employee_infos";
-import Contract from '@/components/Contract';
-import Pay_slip from '@/components/Pay_slip';
+import Home from '../components/home';
+import Login from '../components/Login';
+import Register from '../components/Register';
+import Profile from '../components/Profile';
+import About from '../components/About';
+import Add_employee from '../components/Add_employee';
+import Add_company from '../components/Add_company';
+import EmployeeInfo from "../components/Employee_infos";
+import Contract from '../components/Contract';
+import Pay_slip from '../components/Pay_slip';
 
 
 Vue.use(Router);
