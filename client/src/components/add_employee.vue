@@ -56,7 +56,7 @@
 import axios from "axios";
 
 export default {
-  name: "add",
+  name: "Add_employee",
   data() {
     return {
       employee: {
