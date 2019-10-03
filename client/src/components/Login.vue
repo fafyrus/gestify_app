@@ -34,7 +34,7 @@
 
     methods: {
       login() {
-        axios.post('http://localhost:3000/users/login', {
+        axios.post('/users/login', {
             email: this.email,
             password: this.password
           }).then(res => {

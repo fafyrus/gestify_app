@@ -39,7 +39,7 @@
 
   methods: {
       register () {
-        axios.post('http://localhost:3000/users/register',
+        axios.post('/users/register',
       {
         first_name: this.first_name,
         last_name: this.last_name,

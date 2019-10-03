@@ -12,7 +12,7 @@ export default {
     }
   },
   created() {
-    axios.get(`http://localhost:3000/employee/${this.$route.params.id}`).then(response => {
+    axios.get(`/employee/${this.$route.params.id}`).then(response => {
       if (response.status === 200) {
         console.log(response.data);
         this.employee = response.data;

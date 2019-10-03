@@ -69,7 +69,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:3000/employee').then(response => {
+    axios.get('/employee').then(response => {
       this.listEmployee = response.data;
     }).catch(error => {
       console.log(error)
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     deleteEmployee(id) {
-      axios.delete(`http://localhost:3000/employee/${id}`).then((response) => {
+      axios.delete(`/employee/${id}`).then((response) => {
         if (response.status === 200) {
           console.log("Employee deleted")
           let index = this.listEmployee.findIndex((val) => val.id === id)

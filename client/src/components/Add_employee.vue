@@ -83,7 +83,7 @@ export default {
         this.employee.city ||
         this.employee.state
       ) {
-        axios.post('http://localhost:3000/employee', this.employee).then(response => {
+        axios.post('/employee', this.employee).then(response => {
           if(response.status === 201) {
             this.$router.push('/')
           }

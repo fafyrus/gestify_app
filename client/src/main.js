@@ -4,10 +4,13 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import axios from 'axios';
 require('../node_modules/bootstrap/dist/css/bootstrap.css');
 require('../node_modules/bootstrap/dist/js/bootstrap.min.js');
 
 Vue.config.productionTip = false;
+axios.defaults.baseURL = 'http://bejaouifarouk.fr';
+
 
 /* eslint-disable no-new */
 new Vue({
