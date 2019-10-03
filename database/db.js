@@ -4,7 +4,7 @@ const db = {};
 const sequelize = new Sequelize ("gestify_db", "root", "root", {
     host: "localhost",
     dialect: 'mysql',
-    port: "8889",
+    port: "3306",
     operatorAliases: false,
     pool: {
         max: 5,
