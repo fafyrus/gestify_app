@@ -17,6 +17,7 @@ const Company = require("./routes/Company");
 app.use("/users", Users);
 app.use("/employee", Employee);
 app.use("/company", Company);
+app.use('/', express.static(__dirname + "/client"));
 
 
 app.use("*", (req, res) => {
